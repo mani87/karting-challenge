@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"karting-challenge/handlers"
+	"karting-challenge/middlewares"
 )
 
 func SetupRouter() *gin.Engine {
@@ -10,7 +11,7 @@ func SetupRouter() *gin.Engine {
 
 	api := r.Group("/api")
 	{
-		api.GET("/product", handlers.ListProducts)
+		api.GET("/product", middlewares.IsAuthentic(), handlers.ListProducts)
 		api.GET("/product/:productId", handlers.GetProduct)
 	}
 
