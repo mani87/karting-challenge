@@ -1,8 +1,8 @@
-package middlewares
+package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"karting-challenge/config"
+	"karting-challenge/internal/config"
 	"net/http"
 )
 

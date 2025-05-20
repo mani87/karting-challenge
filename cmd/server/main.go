@@ -1,8 +1,8 @@
 package main
 
 import (
-	"karting-challenge/config"
-	"karting-challenge/router"
+	"karting-challenge/internal/config"
+	"karting-challenge/internal/router"
 	"log"
 )
 
