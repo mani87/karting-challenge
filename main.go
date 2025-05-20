@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"karting-challenge/router"
+	"log"
+)
 
 func main() {
-	fmt.Println("Hello world!!");
+	r := router.SetupRouter()
+	log.Println("🚀 Server running on :8080")
+	log.Fatal(r.Run(":8080"))
 }
