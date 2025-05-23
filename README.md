@@ -74,6 +74,7 @@ curl --location 'localhost:8080/api/order' \
 }'
 ```
 It looks like this for now, Frontend is in-progress for now;
-<img width="1466" alt="Screenshot 2025-05-23 at 4 23 15 PM" src="https://github.com/user-attachments/assets/f5848f4a-cdc8-4156-b465-16faee36fe7a" />
+<img width="1450" alt="Screenshot 2025-05-24 at 12 29 29 AM" src="https://github.com/user-attachments/assets/06e3eba2-a436-498b-9102-42342f76d3b3" />
+
 
 
