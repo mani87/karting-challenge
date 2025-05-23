@@ -12,9 +12,9 @@ func ValidatePromoCode(code string) bool {
 	}
 
 	files := []string{
-		"data/couponbase1.gz",
-		"data/couponbase2.gz",
-		"data/couponbase3.gz",
+		"../data/couponbase1.gz",
+		"../data/couponbase2.gz",
+		"../data/couponbase3.gz",
 	}
 
 	count := 0
