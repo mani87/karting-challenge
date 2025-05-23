@@ -8,6 +8,7 @@ import (
 )
 
 var ApiKey string
+var CreateOrderApiKey string
 
 func LoadConfig() {
 	err := godotenv.Load()
@@ -16,7 +17,11 @@ func LoadConfig() {
 	}
 
 	ApiKey = os.Getenv("API_KEY")
+	CreateOrderApiKey = os.Getenv("CREATE_ORDER_API_KEY")
 	if ApiKey == "" {
 		log.Fatal("API_KEY not set")
+	}
+	if CreateOrderApiKey == "" {
+		log.Fatal("CREATE_ORDER_API_KEY not set")
 	}
 }
