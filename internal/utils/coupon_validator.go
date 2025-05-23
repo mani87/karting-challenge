@@ -17,15 +17,27 @@ func ValidatePromoCode(code string) bool {
 		"../data/couponbase3.gz",
 	}
 
-	count := 0
+	type result struct {
+		found bool
+	}
+	ch := make(chan result, len(files))
+
 	for _, file := range files {
-		if fileHasCode(file, code) {
+		go func(file string) {
+			ch <- result{found: fileHasCode(file, code)}
+		}(file)
+	}
+
+	count := 0
+	for i := 0; i < len(files); i++ {
+		if (<-ch).found {
 			count++
 			if count >= 2 {
 				return true
 			}
 		}
 	}
+
 	return false
 }
 
