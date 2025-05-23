@@ -74,5 +74,6 @@ curl --location 'localhost:8080/api/order' \
 }'
 ```
 It looks like this for now, Frontend is in-progress for now;
-![Uploading Screenshot 2025-05-23 at 4.23.15 PM.png…]()
+<img width="1466" alt="Screenshot 2025-05-23 at 4 23 15 PM" src="https://github.com/user-attachments/assets/f5848f4a-cdc8-4156-b465-16faee36fe7a" />
+
 
