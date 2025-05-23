@@ -14,9 +14,13 @@ func Order(c *gin.Context) {
 		return
 	}
 
-	// todo: validate promo code
+	// This will not work with actual server unless we have files there
+	// valid := utils.ValidatePromoCode(req.CouponCode)
+	// if !valid {
+	//	 c.JSON(http.StatusUnprocessableEntity, gin.H{"message": "Invalid promotion code"})
+	//	 return
+	// }
 
-	// Create Order
 	order := models.Order{
 		ID:        uuid.New().String(),
 		Items:     req.Items,
@@ -34,7 +38,9 @@ func Order(c *gin.Context) {
 		}
 	}
 
-	// todo: Take care of discount here
+	if len(req.CouponCode) > 0 {
+		order.Discounts = order.Total * 0.80 // 20% discount if its valid coupon
+	}
 
 	c.JSON(http.StatusOK, order)
 }
