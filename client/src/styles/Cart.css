@@ -1,0 +1,94 @@
+.cart-box {
+    background: #fffaf8;
+    padding: 24px;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 680px;
+}
+
+.cart-title {
+    color: #d1563a;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.cart-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0e9e9;
+}
+
+.entry-text {
+    flex: 1;
+}
+
+.entry-name {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: #444;
+}
+
+.entry-pricing {
+    font-size: 14px;
+    color: #888;
+    display: flex;
+    gap: 10px;
+}
+
+.entry-qty {
+    color: #d1563a;
+    font-weight: 600;
+}
+
+.remove-btn {
+    background: none;
+    border-radius: 50%;
+    border-color: white;
+    width: 26px;
+    height: 26px;
+    color: #94403a;
+    font-size: 16px;
+}
+
+.cart-total {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 600;
+    color: #3a2d2d;
+}
+
+.total-price {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.carbon-message {
+    background: #fcf7f4;
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    color: #555;
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.confirm-btn {
+    width: 100%;
+    padding: 14px;
+    background: #c74417;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+}

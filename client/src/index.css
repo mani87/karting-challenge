@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fef8f6;
+    font-family: 'Nunito', sans-serif;
+}
+
+.main-container {
+    padding: 20px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #3a2d2d;
+    margin-bottom: 24px;
+    margin-top: 0;
+}
+
+.content-layout {
+    display: flex;
+    gap: 40px;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
