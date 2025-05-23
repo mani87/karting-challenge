@@ -4,61 +4,69 @@ import (
 	"bufio"
 	"compress/gzip"
 	"os"
+	"sync"
 )
 
-func ValidatePromoCode(code string) bool {
-	if len(code) < 8 || len(code) > 10 {
-		return false
-	}
+var (
+	promoCache map[string]int
+	once       sync.Once
+)
 
+func loadPromoCache() {
 	files := []string{
 		"../data/couponbase1.gz",
 		"../data/couponbase2.gz",
 		"../data/couponbase3.gz",
 	}
 
-	type result struct {
-		found bool
-	}
-	ch := make(chan result, len(files))
+	promoCache = make(map[string]int)
+	wg := sync.WaitGroup{}
+	fileResults := make(chan map[string]bool, len(files))
 
+	// Load each file concurrently into a local map
 	for _, file := range files {
-		go func(file string) {
-			ch <- result{found: fileHasCode(file, code)}
+		wg.Add(1)
+		go func(filePath string) {
+			defer wg.Done()
+			localCodes := make(map[string]bool)
+
+			f, err := os.Open(filePath)
+			if err != nil {
+				fileResults <- localCodes
+				return
+			}
+			defer f.Close()
+
+			gz, err := gzip.NewReader(f)
+			if err != nil {
+				fileResults <- localCodes
+				return
+			}
+			defer gz.Close()
+
+			scanner := bufio.NewScanner(gz)
+			for scanner.Scan() {
+				localCodes[scanner.Text()] = true
+			}
+			fileResults <- localCodes
 		}(file)
 	}
 
-	count := 0
-	for i := 0; i < len(files); i++ {
-		if (<-ch).found {
-			count++
-			if count >= 2 {
-				return true
-			}
+	wg.Wait()
+	close(fileResults)
+
+	for localSet := range fileResults {
+		for code := range localSet {
+			promoCache[code]++
 		}
 	}
-
-	return false
 }
 
-func fileHasCode(filePath string, code string) bool {
-	f, err := os.Open(filePath)
-	if err != nil {
+func ValidatePromoCode(code string) bool {
+	if len(code) < 8 || len(code) > 10 {
 		return false
 	}
-	defer f.Close()
 
-	gz, err := gzip.NewReader(f)
-	if err != nil {
-		return false
-	}
-	defer gz.Close()
-
-	scanner := bufio.NewScanner(gz)
-	for scanner.Scan() {
-		if scanner.Text() == code {
-			return true
-		}
-	}
-	return false
+	once.Do(loadPromoCache)
+	return promoCache[code] >= 2
 }
