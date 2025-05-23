@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"karting-challenge/internal/models"
+	"karting-challenge/internal/utils"
 	"net/http"
 )
 
@@ -14,12 +15,11 @@ func Order(c *gin.Context) {
 		return
 	}
 
-	// This will not work with actual server unless we have files there
-	// valid := utils.ValidatePromoCode(req.CouponCode)
-	// if !valid {
-	//	 c.JSON(http.StatusUnprocessableEntity, gin.H{"message": "Invalid promotion code"})
-	//	 return
-	// }
+	valid := utils.ValidatePromoCode(req.CouponCode)
+	if !valid {
+		c.JSON(http.StatusUnprocessableEntity, gin.H{"message": "Invalid promotion code"})
+		return
+	}
 
 	order := models.Order{
 		ID:        uuid.New().String(),

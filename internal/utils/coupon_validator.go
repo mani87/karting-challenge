@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"compress/gzip"
 	"os"
+	"path/filepath"
 )
 
 func ValidatePromoCode(code string) bool {
@@ -12,9 +13,9 @@ func ValidatePromoCode(code string) bool {
 	}
 
 	files := []string{
-		"../data/couponbase1.gz",
-		"../data/couponbase2.gz",
-		"../data/couponbase3.gz",
+		getAbsolutePath("internal/data/couponbase1.gz"),
+		getAbsolutePath("internal/data/couponbase2.gz"),
+		getAbsolutePath("internal/data/couponbase3.gz"),
 	}
 
 	type result struct {
@@ -61,4 +62,12 @@ func fileHasCode(filePath string, code string) bool {
 		}
 	}
 	return false
+}
+
+func getAbsolutePath(relPath string) string {
+	cwd, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	return filepath.Join(cwd, relPath)
 }
